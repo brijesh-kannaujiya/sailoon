@@ -46,11 +46,12 @@ export default function EditCampaign(props) {
   const dispatch = useDispatch();
   useEffect(() => {
    if(editdetailData!==""){
-    //alert(editdetailData.result.image_name)
+    // alert(editdetailData)
     //alert(editdetailData.result.product_image)
+    // console.log(editdetailData.result.cp_name_ar);
     setDatashow(editdetailData.result);
-    setFilePath_D(process.env.REACT_APP_API_PATH+"campaignapi/deal_image/"+editdetailData.result.image_name)
-    setFilePath_P(process.env.REACT_APP_API_PATH+"campaignapi/deal_image_product/"+editdetailData.result.product_image)
+    setFilePath_D(process.env.REACT_APP_API_PATH+"campaignapi/"+editdetailData.result.image_name)
+    setFilePath_P(process.env.REACT_APP_API_PATH+"campaignapi/"+editdetailData.result.product_image)
    }
   }, []);
   const handleFileChange = (event) => {
@@ -109,8 +110,9 @@ function converToLocalTime(serverDate) {
             setLoading(true);
             //deal_id
           const formData = new FormData(event.currentTarget);
-          const formJson = Object.fromEntries(formData.entries());
+          const formJson = Object.fromEntries(formData.entries()); 
           const cp_name = formJson.campainname_en;
+          const campainname_ar = formJson.campainname_ar;
           const dealprice = formJson.Price;
           const shortdiscription = formJson.shortdiscription;
           const longdiscription = formJson.longdiscription;
@@ -126,6 +128,7 @@ function converToLocalTime(serverDate) {
           let data = new FormData();
           data.append('deal_id', btoa(datashow.deal_id));
           data.append('cp_name', cp_name);
+          data.append('cp_name_ar', campainname_ar);
           data.append('cp_price', dealprice);
           data.append('cp_shortdiscription', shortdiscription);
           data.append('cp_longdiscription', longdiscription);
@@ -138,6 +141,7 @@ function converToLocalTime(serverDate) {
           data.append("avatar_product",filePath2_d);
           data.append('cp_product_name', cp_product_name);
           data.append('cp_product_price', '');
+          // console.log(data);
             let config = {
             method: 'post',
             maxBodyLength: Infinity,
@@ -213,7 +217,7 @@ function converToLocalTime(serverDate) {
           <TextField
             autoFocus
             required
-            value={datashow.cp_name}
+            value={datashow.cp_name_ar}
             margin="dense"
             id="campainname_ar"
             name="campainname_ar"
@@ -221,7 +225,7 @@ function converToLocalTime(serverDate) {
             type="text"
             fullWidth
             variant="standard"
-            onChange={(e) => setDatashow({...datashow,cp_name:e.target.value})}
+            onChange={(e) => setDatashow({...datashow,cp_name_ar:e.target.value})}
           />
           </div>
          </Stack>

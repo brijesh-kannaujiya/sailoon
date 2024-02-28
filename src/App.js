@@ -6,6 +6,7 @@ import Topwithslidebar from "./pages/dashboard/components/Topwithslidebar";
 import { useNavigate} from "react-router-dom";
 import PageNotfound from './pages/PageNotfound';
 import "react-toastify/dist/ReactToastify.css";
+import ListCategory from './pages/category/ListCategory';
 function App() {
   const [inactiveTime, setInactiveTime] = useState(0);
   const [logoutMessage, setLogoutMessage] = useState('');
@@ -63,6 +64,7 @@ function App() {
             <Routes>
               <Route path="/login" element={<LoginPage />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/category" element={<ListCategory />} />
               <Route path='*' exact={true} element={<PageNotfound />} />
             </Routes>
           </main>

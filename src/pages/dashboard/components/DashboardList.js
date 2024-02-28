@@ -43,12 +43,13 @@ const handleClose_delete = () => {
 
 const columns = [
   { field: 'cp_name', headerName: 'name', width: 100},
+  { field: 'cp_name_ar', headerName: 'name ar', width: 100},
   { field: 'image_name', headerName: 'Image', width: 130,
   renderCell: (params) => {
-    console.log(process.env.REACT_APP_API_PATH+"campaignapi/deal_image/"+params.row.image_name)
+    console.log(process.env.REACT_APP_API_PATH+"campaignapi/"+params.row.image_name)
     return (
     <>
-    <img src={process.env.REACT_APP_API_PATH+"campaignapi/deal_image/"+params.row.image_name} alt="Uploaded file"  style={{width:80,height:50}}/>
+    <img src={process.env.REACT_APP_API_PATH+"campaignapi/"+params.row.image_name} alt="Uploaded file"  style={{width:80,height:50}}/>
     </>
     )
     } 
@@ -79,7 +80,7 @@ const columns = [
     width: 130,
     renderCell: (params) => (
       <>
-      <img src={process.env.REACT_APP_API_PATH+"campaignapi/deal_image_product/"+params.row.product_image} alt="Uploaded file"  style={{width:80,height:50}}/>
+      <img src={process.env.REACT_APP_API_PATH+"campaignapi/"+params.row.product_image} alt="Uploaded file"  style={{width:80,height:50}}/>
       </>
     )
     //
@@ -157,6 +158,7 @@ if(camstatus==="idle"){
       </div>
     )
   }else{
+     
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid
