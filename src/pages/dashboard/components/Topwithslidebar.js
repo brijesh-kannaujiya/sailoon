@@ -16,8 +16,10 @@ import SubMenuItem from "./SubMenuItem";
 import Avatar from "@mui/material/Avatar";
 // import uisam from '../../../assets/img/uisam.jpeg'
 import uisam from "../../../assets/Winnner_Logo.svg";
-
+import Dashboard from "../Dashboard";
+import CssBaseline from '@mui/material/CssBaseline';
 const drawerWidth = 240;
+
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -52,6 +54,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
   backgroundColor: "#1F2A40",
 }));
+
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -93,6 +96,7 @@ export default function Topwithslidebar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
+  
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -102,8 +106,8 @@ export default function Topwithslidebar() {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
-      {/* <CssBaseline /> */}
+    <Box sx={{ display: 'flex' }}>
+    <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar sx={{ background: "#320085" }}>
           <IconButton
@@ -128,7 +132,7 @@ export default function Topwithslidebar() {
         <DrawerHeader sx={{ justifyContent: "flex-start",background: "#320085" }}>
           {open ? (
             <Stack direction={"row"}  >
-              <Avatar alt="Admin" src={uisam} />
+              <Avatar alt="Admin" src={uisam}  />
               {open && (
                 <Typography sx={{ m: 1, color: "#fff" }}>ADMIN</Typography>
               )}
@@ -168,6 +172,12 @@ export default function Topwithslidebar() {
         </List>
         <Divider sx={{ backgroundColor: "#320085" }} />
       </Drawer>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Dashboard/>
+      </Box>
+      {/* <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <Dashboard />
+        </Box>  */}
     </Box>
   );
 }

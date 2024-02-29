@@ -61,10 +61,11 @@ function App() {
   }else{ 
   return (
     <div className="app">
+      
           <main className="content">
             <Routes>
               <Route path="/login" element={<LoginPage />} />
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/dashboard" element={<Topwithslidebar />} />
               <Route path="/category" element={<Category />} />
               <Route path="/campaign" element={<Campaign />} />
               <Route path='*' exact={true} element={<PageNotfound />} />

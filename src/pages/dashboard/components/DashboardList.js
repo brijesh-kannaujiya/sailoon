@@ -189,7 +189,7 @@ export default function DashboardList() {
       );
     } else {
       return (
-        <div style={{ height: 400, width: "100%" }}>
+        <Box sx={{ height: 400, width: '100%' }}>
           <DataGrid
             rows={camData.result}
             columns={columns}
@@ -210,7 +210,7 @@ export default function DashboardList() {
             pageSizeOptions={[5, 10]}
             checkboxSelection={true}
           />
-        </div>
+        </Box>
       );
     }
   }

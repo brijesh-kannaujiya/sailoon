@@ -31,9 +31,10 @@ const Dashboard = () => {
     handleClick();
   }else{
   return (
-    <Box  sx={{ mt:10,ml:4}}>
-       <Topwithslidebar  />
-      <Stack sx={{pl:10,pr:10,mt:4}}>
+    <>
+    
+    <Box  sx={{mt:10,ml:1}}>
+      <Stack sx={{pl:2,pr:2,mt:4}}>
       <Box
         display="grid"
         gridTemplateColumns="repeat(12, 1fr)"
@@ -53,6 +54,7 @@ const Dashboard = () => {
         </Box>
       </Stack>
     </Box>
+    </>
   )
 }
 }
