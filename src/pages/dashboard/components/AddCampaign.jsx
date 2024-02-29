@@ -64,7 +64,7 @@ export default function FormDialog() {
   useEffect(() => {
     
     let config = {
-      method: "post",
+      method: "get",
       maxBodyLength: Infinity,
       url: process.env.REACT_APP_API_PATH + process.env.REACT_APP_CATEGORY,
       headers: {
@@ -74,21 +74,9 @@ export default function FormDialog() {
     axios
       .request(config)
       .then((response) => {
-        alert("hello");
+        // alert("hello");
         console.log("dfscvghjnefked");
-        console.log(JSON.stringify(response.data));
-        // if (response.data.status === "success") {
-        //   toast.success(response.data.message, {
-        //     position: "top-right",
-        //   });
-        //   dispatch(retrieveCampaign());
-        // } else {
-        //   toast.error(response.data.message, {
-        //     position: "top-right",
-        //   });
-        // }
-        // setLoading(false);
-        // handleClose();
+        console.log(JSON.stringify(response.data)); 
       })
       .catch((error) => {
         // console.log(error);

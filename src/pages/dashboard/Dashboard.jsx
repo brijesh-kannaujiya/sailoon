@@ -1,23 +1,23 @@
 import React,{useEffect} from 'react'
 import Box from '@mui/material/Box';
-import UserDetail from './components/UserDetail';
-import { Stack,Typography ,Divider,Button} from '@mui/material';
+// import UserDetail from './components/UserDetail';
+import { Stack} from '@mui/material';
 import Topwithslidebar from './components/Topwithslidebar';
 import DashboardList from './components/DashboardList';
 import {StatBox} from './components/StatBox';
 import GroupIcon from '@mui/icons-material/Group';
 import { useSelector, useDispatch } from 'react-redux';
-import {retrieveCampaign,selectAllData,getDataStatus,getDataError} from '../../redux/campaignSlice'
-import styles from '../dashboard/dashboardstyle.module.css';
+import {retrieveCampaign,selectAllData,getDataStatus} from '../../redux/campaignSlice'
+// import styles from '../dashboard/dashboardstyle.module.css';
 import AddCampaign from './components/AddCampaign';
 import { useNavigate} from "react-router-dom";
 
-const axios = require('axios');
+// const axios = require('axios');
 const Dashboard = () => {
   const dispatch = useDispatch();
   const camData = useSelector(selectAllData);
   const camstatus = useSelector(getDataStatus);
-  const error = useSelector(getDataError);
+  // const error = useSelector(getDataError);
   const navigate = useNavigate();
   const handleClick=()=>{
     navigate("/login");
@@ -47,7 +47,6 @@ const Dashboard = () => {
         </Box>
         <div>
           <AddCampaign/>
-       
         </div>
         <Box sx={{mt:1}}>
         <DashboardList />

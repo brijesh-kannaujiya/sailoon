@@ -5,8 +5,9 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import Topwithslidebar from "./pages/dashboard/components/Topwithslidebar";
 import { useNavigate} from "react-router-dom";
 import PageNotfound from './pages/PageNotfound';
-import "react-toastify/dist/ReactToastify.css";
-import ListCategory from './pages/category/ListCategory';
+import "react-toastify/dist/ReactToastify.css"; 
+import Category from './pages/category/Category';
+import Campaign from './pages/campaign/Campaign';
 function App() {
   const [inactiveTime, setInactiveTime] = useState(0);
   const [logoutMessage, setLogoutMessage] = useState('');
@@ -57,14 +58,15 @@ function App() {
   }
   if(logoutMessage==="You have been logged out due to inactivity."){
     handleClickSS();
-  }else{
+  }else{ 
   return (
     <div className="app">
           <main className="content">
             <Routes>
               <Route path="/login" element={<LoginPage />} />
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/category" element={<ListCategory />} />
+              <Route path="/category" element={<Category />} />
+              <Route path="/campaign" element={<Campaign />} />
               <Route path='*' exact={true} element={<PageNotfound />} />
             </Routes>
           </main>

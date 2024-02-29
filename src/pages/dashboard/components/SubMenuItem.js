@@ -15,21 +15,66 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import AddchartIcon from "@mui/icons-material/Addchart";
-import CloudDoneIcon from "@mui/icons-material/CloudDone";
-import ChatIcon from "@mui/icons-material/Chat";
-import { useNavigation } from "react-router-dom";
-
+import AddchartIcon from "@mui/icons-material/Addchart"; 
+import { useNavigate} from "react-router-dom"; 
+import DashboardIcon from '@mui/icons-material/Dashboard'; 
+import CategoryIcon from '@mui/icons-material/Category';
+import CampaignIcon from '@mui/icons-material/Campaign';
 
 const SubMenuItem = (props) => {
 
-  // const navigate = useNavigation();
-  // const handleClick = () => {
-  //   navigate.navigate('/category');
-  // };
+  const navigate = useNavigate();
+  const handleNavigateClick=(link)=>{
+    navigate(link); 
+  }
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
-    <Box>
-      <Accordion sx={{ backgroundColor: "#1F2A40" }}>
+    <Box  sx={{ backgroundColor: "#320085" }} > 
+    
+
+    <nav aria-label="main mailbox folders">
+        <List sx={{ color: "#fff" }}>
+          <ListItem disablePadding   onClick={()=>handleNavigateClick('/dashboard')} >
+            <ListItemButton >
+              <ListItemIcon>
+                <DashboardIcon sx={{ color: "#fff" }}/>
+              </ListItemIcon>
+              <ListItemText primary="Dashboard"  />
+            </ListItemButton>
+          </ListItem>
+          <Divider sx={{ backgroundColor: "#fff" }} />
+          <ListItem disablePadding   onClick={()=>handleNavigateClick('/category')}>
+            <ListItemButton>
+              <ListItemIcon>
+                <CategoryIcon sx={{ color: "#fff" }}/>
+              </ListItemIcon>
+              <ListItemText primary="Category" />
+            </ListItemButton>
+          </ListItem>
+          <Divider sx={{ backgroundColor: "#fff" }} />
+          <ListItem disablePadding   onClick={()=>handleNavigateClick('/campaign')}>
+            <ListItemButton>
+              <ListItemIcon>
+                <CampaignIcon sx={{ color: "#fff" }}/>
+              </ListItemIcon>
+              <ListItemText primary="Campaign" />
+            </ListItemButton>
+          </ListItem>
+          <Divider sx={{ backgroundColor: "#fff" }} />
+        </List>
+      </nav>
+
+{/* 
+      <Accordion sx={{ backgroundColor: "#320085" }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon sx={{ color: "#fff" }} />}
           aria-controls="panel1a-content"
@@ -68,7 +113,8 @@ const SubMenuItem = (props) => {
           </Box>
         </AccordionDetails>
       </Accordion>
-      <Accordion sx={{ backgroundColor: "#1F2A40" }}>
+      <Divider sx={{ backgroundColor: "#fff" }} />
+      <Accordion sx={{ backgroundColor: "#320085" }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon sx={{ color: "#fff" }} />}
           aria-controls="panel2a-content"
@@ -107,7 +153,7 @@ const SubMenuItem = (props) => {
         </AccordionDetails>
       </Accordion>
       <Divider sx={{ backgroundColor: "#fff" }} />
-      <Accordion sx={{ backgroundColor: "#1F2A40" }}>
+      <Accordion sx={{ backgroundColor: "#320085" }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon sx={{ color: "#fff" }} />}
           aria-controls="panel2a-content"
@@ -122,8 +168,8 @@ const SubMenuItem = (props) => {
             )}
           </Stack>
         </AccordionSummary>
-        <AccordionDetails sx={{ backgroundColor: "background.paper" }}>
-          <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
+        <AccordionDetails sx={{ backgroundColor: "background.paper"}}>
+          <Box sx={{ width: "100%", bgcolor: "background.paper" }} onClick={()=>handleNavigateClick('/dashboard')}>
             <List>
               <ListItem disablePadding>
                 <ListItemButton>
@@ -147,7 +193,7 @@ const SubMenuItem = (props) => {
       </Accordion>
 
       <Divider sx={{ backgroundColor: "#fff" }} />
-      <Accordion sx={{ backgroundColor: "#1F2A40" }}>
+      <Accordion sx={{ backgroundColor: "#320085" }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon sx={{ color: "#fff" }} />}
           aria-controls="panel2a-content"
@@ -186,47 +232,7 @@ const SubMenuItem = (props) => {
         </AccordionDetails>
       </Accordion>
 
-      <Divider sx={{ backgroundColor: "#fff" }} />
-      <Accordion sx={{ backgroundColor: "#1F2A40" }}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon sx={{ color: "#fff" }} />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Stack direction={"row"}>
-            <GroupsIcon sx={{ color: "#fff" }} />
-            {props.open && (
-              <Typography sx={{ color: "#fff", ml: 2 }}>
-                Manage Category
-              </Typography>
-            )}
-          </Stack>
-        </AccordionSummary>
-        <AccordionDetails sx={{ backgroundColor: "background.paper" }}>
-          <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
-            <List>
-              <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    <ViewListIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Category List" />
-                </ListItemButton>
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    <AddchartIcon />
-                  </ListItemIcon>
-                 
-                  {/* <ListItemText onClick={handleClick} primary="Create Category" /> */}
-                </ListItemButton>
-              </ListItem>
-            </List>
-          </Box>
-        </AccordionDetails>
-      </Accordion>
-
+       */}
 
     </Box>
   );
