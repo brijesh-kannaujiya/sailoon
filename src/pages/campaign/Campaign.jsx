@@ -31,7 +31,7 @@ const Campaign = () => {
       return (
         <>
       <Topwithslidebar  />
-      <Box  sx={{mt:10,ml:openstatus===true ? 30 :5}}>
+      <Box  sx={{mt:10,ml:openstatus===true ? 30 :10}}>
        <Stack sx={{pl:10,pr:10,mt:4}}> 
          <div>
            <AddCampaign/>

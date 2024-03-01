@@ -14,9 +14,10 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Stack from "@mui/material/Stack";
 import SubMenuItem from "./SubMenuItem";
 import Avatar from "@mui/material/Avatar";
-// import uisam from '../../../assets/img/uisam.jpeg'
+import headerlogo from '../../../assets/logo_grp.png'
 import uisam from "../../../assets/Winnner_Logo.svg";
 import Dashboard from "../Dashboard";
+import { Container } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import {openDrawserS} from '../../../redux/AllapplicationStatus'
 import { useSelector, useDispatch } from 'react-redux';
@@ -129,7 +130,9 @@ export default function Topwithslidebar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            ADMIN DASHBOARD
+          <Container>
+            <img src={headerlogo} alt="Image description" />
+        </Container>
           </Typography>
         </Toolbar>
       </AppBar>
@@ -138,7 +141,8 @@ export default function Topwithslidebar() {
         <DrawerHeader sx={{ justifyContent: "flex-start",background: "#320085" }}>
           {open ? (
             <Stack direction={"row"}  >
-              <Avatar alt="Admin" src={uisam}  />
+              {/* <Avatar alt="Admin" src={uisam}  /> */}
+              <img src={uisam} style={{height:50,width:100}} alt="Image description" />
               {open && (
                 <Typography sx={{ m: 1, color: "#fff" }}>ADMIN</Typography>
               )}
@@ -155,7 +159,7 @@ export default function Topwithslidebar() {
             </Stack>
           ) : (
             <Stack direction={"row"} sx={{ mt: 7.5, p: 1 , background: "#320085" }}>
-              <Avatar alt="Admin" src={uisam}  />
+           <img src={uisam} style={{height:50,width:40}} alt="Image description" />
               {open && (
                 <Typography sx={{ m: 1, color: "#fff" }}>ADMIN</Typography>
               )}
