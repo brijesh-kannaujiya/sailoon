@@ -7,6 +7,7 @@ import AddCampaign from '../dashboard/components/AddCampaign';
 import DashboardList from '../dashboard/components/DashboardList';
 import { Stack} from '@mui/material';
 import {retrieveCampaign,selectAllData,getDataStatus,getDataError} from '../../redux/campaignSlice'
+import { openstatusss } from '../../redux/AllapplicationStatus';
 
 const Campaign = () => {
     const dispatch = useDispatch();
@@ -14,22 +15,23 @@ const Campaign = () => {
     const camstatus = useSelector(getDataStatus);
     const error = useSelector(getDataError);  
     const navigate = useNavigate();
-
+    const openstatus= useSelector(openstatusss);
     useEffect(() => {
         if (camstatus === 'idle') {
           dispatch(retrieveCampaign());
         }
       }, [camstatus, dispatch]);
     const handleClick = () => {
-      navigate("/login");
+      navigate("/");
     }
   
     if (camData.message === "Session expired") {
       handleClick();
     } else {
       return (
-        <Box  sx={{ mt:10,ml:4}}>
-        <Topwithslidebar  />
+        <>
+      <Topwithslidebar  />
+      <Box  sx={{mt:10,ml:openstatus===true ? 30 :5}}>
        <Stack sx={{pl:10,pr:10,mt:4}}> 
          <div>
            <AddCampaign/>
@@ -39,6 +41,7 @@ const Campaign = () => {
          </Box>
        </Stack>
      </Box>
+     </>
       );
     }
 }

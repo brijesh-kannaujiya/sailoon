@@ -18,6 +18,9 @@ import Avatar from "@mui/material/Avatar";
 import uisam from "../../../assets/Winnner_Logo.svg";
 import Dashboard from "../Dashboard";
 import CssBaseline from '@mui/material/CssBaseline';
+import {openDrawserS} from '../../../redux/AllapplicationStatus'
+import { useSelector, useDispatch } from 'react-redux';
+
 const drawerWidth = 240;
 
 
@@ -95,14 +98,17 @@ const Drawer = styled(MuiDrawer, {
 export default function Topwithslidebar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-
+  const dispatch = useDispatch();
   
   const handleDrawerOpen = () => {
     setOpen(true);
+    dispatch(openDrawserS(true));
+    //openDrawserS()
   };
 
   const handleDrawerClose = () => {
     setOpen(false);
+    dispatch(openDrawserS(false));
   };
 
   return (
@@ -172,12 +178,10 @@ export default function Topwithslidebar() {
         </List>
         <Divider sx={{ backgroundColor: "#320085" }} />
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <Dashboard/>
-      </Box>
       {/* <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <Dashboard />
-        </Box>  */}
+       
+      </Box> */}
+     
     </Box>
   );
 }

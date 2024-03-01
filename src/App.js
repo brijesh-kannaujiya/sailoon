@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from "react-router-dom";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import LoginPage from "./pages/LoginPage";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Topwithslidebar from "./pages/dashboard/components/Topwithslidebar";
@@ -8,6 +9,7 @@ import PageNotfound from './pages/PageNotfound';
 import "react-toastify/dist/ReactToastify.css"; 
 import Category from './pages/category/Category';
 import Campaign from './pages/campaign/Campaign';
+import thememui from './theme'
 function App() {
   const [inactiveTime, setInactiveTime] = useState(0);
   const [logoutMessage, setLogoutMessage] = useState('');
@@ -53,7 +55,7 @@ function App() {
   const navigate = useNavigate();
   const handleClickSS=()=>{
     //navigate("/login");
-    window.location.href = '/login';
+    window.location.href = '/';
     setInactiveTime(0)
   }
   if(logoutMessage==="You have been logged out due to inactivity."){
@@ -61,11 +63,13 @@ function App() {
   }else{ 
   return (
     <div className="app">
-      
+    
+
           <main className="content">
+             {/* <Topwithslidebar/> */}
             <Routes>
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/dashboard" element={<Topwithslidebar />} />
+              <Route path="/" element={<LoginPage />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/category" element={<Category />} />
               <Route path="/campaign" element={<Campaign />} />
               <Route path='*' exact={true} element={<PageNotfound />} />

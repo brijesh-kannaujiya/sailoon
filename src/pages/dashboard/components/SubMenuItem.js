@@ -39,8 +39,6 @@ const SubMenuItem = (props) => {
 
   return (
     <Box  sx={{ backgroundColor: "#320085" }} > 
-    
-
     <nav aria-label="main mailbox folders">
         <List sx={{ color: "#fff" }}>
           <ListItem disablePadding   onClick={()=>handleNavigateClick('/dashboard')} >

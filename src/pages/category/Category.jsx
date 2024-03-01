@@ -8,13 +8,14 @@ import { useNavigate } from "react-router-dom";
 import Topwithslidebar from '../dashboard/components/Topwithslidebar';
 import CategoryList from './CategoryList';
 import AddCategory from './AddCategory';
+import { openstatusss } from '../../redux/AllapplicationStatus';
 // import AddCampaign from '../dashboard/components/AddCampaign';
 
 const Category = () => { 
   const dispatch = useDispatch();
   const categoryData = useSelector(selectAllCategories);
   const categoryStatus = useSelector(getCategoryDataStatus);
-  // const error = useSelector(getCategoryDataError);
+  const openstatus= useSelector(openstatusss);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,24 +25,30 @@ const Category = () => {
   }, [categoryStatus, dispatch]);
 
   const handleClick = () => {
-    navigate("/login");
+    navigate("/");
   }
 
   if (categoryData.message === "Session expired") {
     handleClick();
   } else {
     return (
-      <Box sx={{ mt: 10, ml: 4 }}>
-          <Topwithslidebar  />
+      <>
+       <Topwithslidebar  /> 
+       <Box  sx={{mt:8,ml:openstatus===true ? 30 :5}}>
+         
         {/* Other components */}
-        <Stack sx={{ pl: 10, pr: 10, mt: 4 }}>
-        <div> 
+        <div style={{marginRight:50,marginLeft:50,marginTop:40}}> 
            <AddCategory/>
+           <div style={{marginTop:100}}>
+           <CategoryList />
+           </div>
          </div>
-         <CategoryList />
-        </Stack>
+        {/* <Stack sx={{ pl: 2, pr: 2, mt: 2 }}>
         
+         <CategoryList />
+        </Stack> */}
       </Box>
+      </>
     );
   }
 };
