@@ -33,7 +33,7 @@ const Dashboard = () => {
   return (
     <>
     
-    <Box  sx={{mt:10,ml:1}}>
+    <Box  sx={{mt:10,ml:1,maxWidth:'84%',overflow:'hidden'}}>
       <Stack sx={{pl:2,pr:2,mt:4}}>
       <Box
         display="grid"
