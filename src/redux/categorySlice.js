@@ -10,7 +10,7 @@ export const retrieveCategories = createAsyncThunk(
   }
 );
 
-export const getCategoryDetails = createAsyncThunk(
+export const getSingleCategoryDetails = createAsyncThunk(
   "categoryapi/CategoryDetails",
   async (uuid) => {
     const res = await AllApisDataService.getCategoryDetail(uuid);
@@ -44,14 +44,14 @@ const categorySlice = createSlice({
         state.status = 'failed';
         state.error = action.error;
       })
-      .addCase(getCategoryDetails.pending, (state) => {
+      .addCase(getSingleCategoryDetails.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(getCategoryDetails.fulfilled, (state, action) => { 
+      .addCase(getSingleCategoryDetails.fulfilled, (state, action) => { 
         state.status = 'succeeded';
         state.categoryDetail = action.payload;
       })
-      .addCase(getCategoryDetails.rejected, (state, action) => {
+      .addCase(getSingleCategoryDetails.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error;
       });
@@ -61,6 +61,11 @@ const categorySlice = createSlice({
 export const selectAllCategories = (state) => state.category.categoryData;
 export const getCategoryDataStatus = (state) => state.category.status;
 export const getCategoryDataError = (state) => state.category.error;
-export const getCategoryDetail = (state) => state.category.categoryDetail;
+// export const getCategoryDetail = (state) => state.category.categoryDetail.categories[0];
+export function getCategoryDetails(state) {
+  console.log(state);
+  return state.category.categoryDetail.categories[0];
+}
+
 
 export default categorySlice.reducer;

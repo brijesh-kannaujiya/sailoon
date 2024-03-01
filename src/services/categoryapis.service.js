@@ -6,9 +6,9 @@ class CategoryDataService {
     return http.get("/category/category.php");
   }
 
-  // getCategoryDetail(uuid) {
-  //   return http.get(`category/category.php?uuid=${uuid}`);
-  // }
+  getCategoryDetail(uuid) {
+    return http.get(`category/category.php?uuid=${uuid}`);
+  }
 
   // deactiveCampaignapi(uuid) {
   //   return http.get(`category/category.php?uuid=${uuid}`);

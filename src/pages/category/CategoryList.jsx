@@ -1,8 +1,8 @@
 import React from "react";
 import {
   // getCategoryDataError,
-  getCategoryDataStatus, 
-  getCategoryDetails,
+  getCategoryDataStatus,  
+  getSingleCategoryDetails,
   selectAllCategories
 } from "../../redux/categorySlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,7 +16,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import Progressshows from "../../components/AllLoaders/Progressshows";
 
 const CategoryList = () => {
-  const CategoruData = useSelector(selectAllCategories);
+  const CategoryData = useSelector(selectAllCategories);
   const camstatus = useSelector(getCategoryDataStatus); 
   const [open, setOpen] = React.useState(false);
   const [dealid, setDealId] = React.useState("");
@@ -40,12 +40,13 @@ const CategoryList = () => {
   };
 
   const columns = [
-    { field: "name", headerName: "name", width: 100 },
-    { field: "name_ar", headerName: "name ar", width: 100 },
+    { field: "name", headerName: "name", width: 300 },
+    { field: "name_ar", headerName: "name ar", width: 300 },
     {
       field: "action",
       headerName: "Action",
       sortable: false,
+      with:300,
       renderCell: (params) => {
         return (
           <Stack direction={"row"}>
@@ -54,7 +55,7 @@ const CategoryList = () => {
                 <IconButton
                   aria-label="Edit"
                   onClick={() => {
-                    dispatch(getCategoryDetails(params.row.uuid));
+                    dispatch(getSingleCategoryDetails(params.row.uuid));
                     handleClickOpen();
                   }}
                 >
@@ -91,7 +92,7 @@ const CategoryList = () => {
   } else if (camstatus === "loading") {
     return <Progressshows />;
   } else {
-    if (CategoruData.status === "fail") {
+    if (CategoryData.status === "fail") {
       return (
         <div
           style={{
@@ -106,12 +107,12 @@ const CategoryList = () => {
       );
     } else {  
       return (
-        <Box > 
+        <Box sx={{width:'100%'}} > 
             <Stack sx={{ pr: 10, mt: 4 , mb:2}}>
                 <h3>Category List</h3>
             </Stack>
           <DataGrid
-            rows={CategoruData.categories}
+            rows={CategoryData.categories}
             columns={columns}
             autoHeight
             initialState={{
