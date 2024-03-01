@@ -1,6 +1,6 @@
 import { Axios } from "axios";
 import React, { useEffect, useState } from "react";  
-import { getCategoryDetails, selectAllCategories } from "../../redux/categorySlice";
+import { getCategoryDetail, selectAllCategories } from "../../redux/categorySlice";
 import Dialog from "@mui/material/Dialog"; 
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -22,7 +22,8 @@ import Progressshows from "../../components/AllLoaders/Progressshows";
 const EditCategory = (props) => {
   const [isloading, setLoading] = React.useState(false);
   const dispatch = useDispatch();
-  const editdetailData = useSelector(getCategoryDetails());
+  const editdetailData = useSelector(getCategoryDetail);
+ //alert(JSON.stringify(editdetailData))
   const [datashow,setDatashow]=useState({}); 
   console.log(editdetailData.result);
   useEffect(() => {

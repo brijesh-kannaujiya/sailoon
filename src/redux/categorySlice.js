@@ -22,7 +22,7 @@ export const getSingleCategoryDetails = createAsyncThunk(
 
 const initialState = {
   categoryData: [],
-  categoryDetail: '',
+  categoryDetail: [],
   status: 'idle',
   error: null,
 };
@@ -61,11 +61,11 @@ const categorySlice = createSlice({
 export const selectAllCategories = (state) => state.category.categoryData;
 export const getCategoryDataStatus = (state) => state.category.status;
 export const getCategoryDataError = (state) => state.category.error;
-// export const getCategoryDetail = (state) => state.category.categoryDetail.categories[0];
-export function getCategoryDetails(state) {
-  console.log(state);
-  return state.category.categoryDetail.categories[0];
-}
+export const getCategoryDetail = (state) => state.category.categoryDetail;
+// export function getCategoryDetails(state) {
+//   console.log(state);
+//   return state.category.categoryDetail.categories[0];
+// }
 
 
 export default categorySlice.reducer;
