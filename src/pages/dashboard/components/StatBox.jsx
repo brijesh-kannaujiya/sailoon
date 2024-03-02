@@ -17,8 +17,6 @@ const bull = (
   </Box>
 );
 
-
-
 export  const StatBox=(props)=> {
   return (
     <Box sx={{ minWidth: 275}}>

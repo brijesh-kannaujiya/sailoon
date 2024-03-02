@@ -25,6 +25,9 @@ import fs from "fs";
 import Progressshows from "../../../components/AllLoaders/Progressshows";
 import { useSelector, useDispatch } from "react-redux";
 import { retrieveCampaign } from "../../../redux/campaignSlice";
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
   const [isloading, setLoading] = React.useState(false);
@@ -109,8 +112,9 @@ export default function FormDialog() {
       </Button>
       <Dialog
         open={open}
-        fullWidth={true}
-        maxWidth={"md"}
+        fullScreen
+       // fullWidth={true}
+        //maxWidth={"md"}
         onClose={handleClose}
         PaperProps={{
           component: "form",
@@ -183,7 +187,23 @@ export default function FormDialog() {
           },
         }}
       >
-        <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+          <AppBar sx={{ position: 'relative',backgroundColor:'#320085;',color:'#FFF' }}>
+          <Toolbar>
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={handleClose}
+              aria-label="close"
+            >
+              <CloseIcon />
+            </IconButton>
+            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+              Add Campaign
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      
+        {/* <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
           Add Campaign
         </DialogTitle>
         <IconButton
@@ -197,7 +217,7 @@ export default function FormDialog() {
           }}
         >
           <CloseIcon />
-        </IconButton>
+        </IconButton> */}
         <DialogContent>
           <Stack direction={"row"} style={{ flex: 1 }}>
             <div style={{ flex: 0.5 }}>
@@ -362,6 +382,28 @@ export default function FormDialog() {
               <textarea
                 id="longdiscription"
                 name="longdiscription"
+                rows="4"
+                cols="50"
+                className={styles.textarea}
+              ></textarea>
+            </div>
+          </Stack>
+          <Stack direction={"row"} style={{ flex: 1 }}>
+            <div style={{ flex: 0.5 }}>
+              <label>Short Discription arbic</label>
+              <textarea
+                id="shortdiscription_ar"
+                name="shortdiscription_ar"
+                rows="4"
+                cols="50"
+                className={styles.textarea}
+              ></textarea>
+            </div>
+            <div style={{ marginLeft: 10, flex: 0.5 }}>
+              <label>Long Discription arbic</label>
+              <textarea
+                id="longdiscription_ar"
+                name="longdiscription_ar"
                 rows="4"
                 cols="50"
                 className={styles.textarea}
