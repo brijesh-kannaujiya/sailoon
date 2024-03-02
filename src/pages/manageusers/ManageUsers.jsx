@@ -34,6 +34,7 @@ const ManageUsers = () => {
   if(camData.message==="Session expired"){
     handleClick();
   }else{
+    if(camData!==""){
   return (
     <>
     {/* openstatus===true ? 50 : 1 */}
@@ -61,6 +62,7 @@ const ManageUsers = () => {
     </Box>
     </>
   )
+    }
 }
 }
 
