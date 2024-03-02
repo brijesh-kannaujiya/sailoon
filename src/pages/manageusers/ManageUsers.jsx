@@ -34,7 +34,7 @@ const ManageUsers = () => {
   if(camData.message==="Session expired"){
     handleClick();
   }else{
-    if(camstatus==="succeeded"){
+    
   return (
     <>
     {/* openstatus===true ? 50 : 1 */}
@@ -47,7 +47,7 @@ const ManageUsers = () => {
        // gridAutoRows="140px"
         gap="20px"
       >
-          <StatBox title={`Total Users : ${camData.users.length}`} icon={<GroupIcon sx={{color:'#fff'}}/>} colorss={'#1F2A40'}/>
+          <StatBox title={`Total Users : ${"1"}`} icon={<GroupIcon sx={{color:'#fff'}}/>} colorss={'#1F2A40'}/>
           <StatBox title={`Total Campaign : ${"0"}`} icon={<GroupIcon sx={{color:'#fff'}}/>} colorss={'#009688'}/>
           <StatBox title={`Total Winner User : ${"0"}`} icon={<GroupIcon sx={{color:'#fff'}}/>} colorss={'#e65100'}/>
           <StatBox title={`Total Sell Products : ${"0"}`} icon={<GroupIcon sx={{color:'#fff'}}/>} colorss={'#607d8b'}/>
@@ -64,6 +64,6 @@ const ManageUsers = () => {
   )
     }
 }
-}
+
 
 export default ManageUsers
