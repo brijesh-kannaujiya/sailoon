@@ -21,6 +21,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import CategoryIcon from "@mui/icons-material/Category";
 import CampaignIcon from "@mui/icons-material/Campaign";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import InfoIcon from '@mui/icons-material/Info';
 const SubMenuItem = (props) => {
   const navigate = useNavigate();
   const handleNavigateClick = (link) => {
@@ -78,6 +79,19 @@ const SubMenuItem = (props) => {
             </ListItemButton>
           </ListItem>
           <Divider sx={{ backgroundColor: "#fff" }} />
+          <ListItem
+            disablePadding
+            onClick={() => handleNavigateClick("/about-us")}
+          >
+            <ListItemButton>
+              <ListItemIcon>
+                <InfoIcon sx={{ color: "#fff" }} />
+              </ListItemIcon>
+              <ListItemText primary="About Us" />
+            </ListItemButton>
+          </ListItem>
+          <Divider sx={{ backgroundColor: "#fff" }} />
+          
         </List>
       </nav>
 

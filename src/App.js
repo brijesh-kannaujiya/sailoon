@@ -11,6 +11,7 @@ import Category from './pages/category/Category';
 import Campaign from './pages/campaign/Campaign';
 import thememui from './theme'
 import ManageUsers from './pages/manageusers/ManageUsers';
+import About from './pages/cms/About';
 function App() {
   const [inactiveTime, setInactiveTime] = useState(0);
   const [logoutMessage, setLogoutMessage] = useState('');
@@ -74,6 +75,7 @@ function App() {
               <Route path="/dashboard" element={<ManageUsers />} />
               <Route path="/category" element={<Category />} />
               <Route path="/campaign" element={<Campaign />} />
+              <Route path="/about-us" element={<About />} />
               <Route path='*' exact={true} element={<PageNotfound />} />
             </Routes>
           </main>
