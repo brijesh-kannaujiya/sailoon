@@ -31,6 +31,7 @@ import Typography from "@mui/material/Typography";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { selectAllCategories } from "../../../redux/categorySlice";
+import { styled } from '@mui/system';
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
@@ -88,15 +89,27 @@ export default function FormDialog() {
     return dateStr;
   }
 
+  const GradientButton = styled(Button)(({ theme }) => ({
+    background: 'linear-gradient(180deg, #5F01FA 50%, #320085 90%)', // Set your gradient colors here
+    border: 0,
+    borderRadius: 3,
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    color: 'white',
+    height: 48,
+    padding: '0 30px',
+    margin: theme.spacing(2),
+  }));
+  
+
   return (
     <React.Fragment>
-      <Button
+      <GradientButton
         variant="contained"
         className={styles.addbutton}
         onClick={handleClickOpen}
       >
         Add Campaign
-      </Button>
+      </GradientButton>
       <Dialog
         open={open}
         fullScreen
