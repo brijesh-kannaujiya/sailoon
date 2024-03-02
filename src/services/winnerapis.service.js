@@ -6,9 +6,6 @@ class WinnerAllDataService {
     return res;
   }
   addCampaignData(data) {
-    // const formData = new FormData(data);
-    // const formJson = Object.fromEntries(formData.entries());
-    //alert(JSON.stringify(data))
     const res = http.post(process.env.REACT_APP_ADD_CAMPAIGN, data);
     return res;
   }
@@ -30,9 +27,9 @@ class WinnerAllDataService {
   }
   
 
-  // create(data) {
-  //   return http.post("/tutorials", data);
-  // }
+  userAactiveDeactive(data) {
+    return http.post("userlist/userlist.php", data);
+  }
 
   // update(id, data) {
   //   return http.put(`/tutorials/${id}`, data);

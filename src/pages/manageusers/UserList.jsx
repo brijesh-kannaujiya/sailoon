@@ -1,14 +1,7 @@
 import React from "react";
 import { DataGrid } from "@mui/x-data-grid/DataGrid";
 import { useSelector, useDispatch } from "react-redux";
-import { 
-  selectAllData,
-  getDataStatus,
-  // getDataError,
-  getDetails,
-  deActiveDeals,
-  retrieveCampaign,
-} from "../../redux/campaignSlice";
+
 import Progressshows from "../../components/AllLoaders/Progressshows";
 
 import Button from "@mui/material/Button";
@@ -17,12 +10,14 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Stack, Box, Tooltip } from "@mui/material";
 
 import Delete from "../Delete";
+import { selectAllUserData,getDataStatus,deActiveDeals, userActiveD, retrieveUser } from "../../redux/userlistSlice";
 
 export default function UserList() {
-  const camData = useSelector(selectAllData);
+  const camData = useSelector(selectAllUserData);
   const camstatus = useSelector(getDataStatus); 
   const [open, setOpen] = React.useState(false);
-  const [dealid, setDealId] = React.useState("");
+  const [id, setId] = React.useState("");
+  const [statusa, setStatusA] = React.useState("");
   const dispatch = useDispatch();
   const handleClose = () => {
     setOpen(false);
@@ -33,109 +28,44 @@ export default function UserList() {
   };
   const [opend, setOpen_D] = React.useState(false);
 
-  const handleClickOpen_delete = (id) => {
+  const handleClickOpen_delete = (id,status) => {
     setOpen_D(true);
-    setDealId(id);
+    setId(id);
+    setStatusA(status);
   };
 
   const handleClose_delete = () => {
     setOpen_D(false);
   };
 
-  const handelDeleteCampain = (dealid) => {
-    dispatch(deActiveDeals(dealid))
-    dispatch(retrieveCampaign());
+  const handelDeleteUserA = (id,status) => {
+    const formData = new FormData();
+    formData.append("id",id);
+    formData.append("status",status);
+    const data={"id":id,
+      "status":status
+  }
+    // const formJson = Object.fromEntries(formData.entries());
+    // alert(JSON.stringify(formJson))
+    dispatch(userActiveD(data))
+    dispatch(retrieveUser());
   };
 
-  
+
   const columns = [
-    { field: "cp_name", headerName: "name", width: 100 },
-    { field: "cp_name_ar", headerName: "name ar", width: 100 },
+    { field: "fName", headerName: "name", width: 200 },
+    { field: "emailId", headerName: "Email Id", width: 200 },
     {
-      field: "image_name",
-      headerName: "Image",
-      width: 130,
-      renderCell: (params) => {
-        console.log(
-          process.env.REACT_APP_API_PATH +
-            "campaignapi/" +
-            params.row.image_name
-        );
-        return (
-          <>
-            <img
-              src={
-                process.env.REACT_APP_API_PATH +
-                "campaignapi/" +
-                params.row.image_name
-              }
-              alt="Uploaded file"
-              style={{ width: 80, height: 50 }}
-            />
-          </>
-        );
-      },
-    },
-    { field: "dealprice", headerName: "Price", width: 130 },
-    {
-      field: "shortdiscription",
-      headerName: "Short Discription",
+      field: "otpVerified",
+      headerName: "User Verified",
       width: 200,
     },
-    {
-      field: "longdiscription",
-      headerName: "Long Discription",
-      //sortable: false,
-      type: "number",
-      width: 130,
-    },
-    {
-      field: "product_name",
-      headerName: "Product Name",
-      //sortable: false,
-      width: 130,
-    },
-    {
-      field: "product_image",
-      headerName: "Product Image",
-      //sortable: false,
-      width: 130,
-      renderCell: (params) => (
-        <>
-          <img
-            src={
-              process.env.REACT_APP_API_PATH +
-              "campaignapi/" +
-              params.row.product_image
-            }
-            alt="Uploaded file"
-            style={{ width: 80, height: 50 }}
-          />
-        </>
-      ),
-      //
-    },
-    {
-      field: "joindeal_count",
-      headerName: "Deal Max Count",
-      //sortable: false,
-      width: 130,
-    },
-    {
-      field: "deal_startdate",
-      headerName: "Start Date",
-      //sortable: false,
-      width: 130,
-    },
-    {
-      field: "deal_enddate",
-      headerName: "End Date",
-      //sortable: false,
-      width: 130,
-    },
+    { field: "mobile", headerName: "Mobile Number", width: 200 },
+    { field: "status", headerName: "User Active Status", width: 200 },
     {
       field: "action",
       headerName: "Action",
+      width:300,
       sortable: false,
       renderCell: (params) => {
         return (
@@ -144,7 +74,15 @@ export default function UserList() {
             <Box sx={{ border: 1 }}>
               <Button
                 aria-label="delete"
-               // onClick={() => handleClickOpen_delete(btoa(params.row.deal_id))}
+                onClick={() => {
+                  //alert(params.row.status)
+                  if(Number(params.row.status)===0){
+                    handleClickOpen_delete(btoa(params.row.id),1);
+                  }else{
+                    handleClickOpen_delete(btoa(params.row.id),0);
+                  }
+                }
+                }
               >
                De-active
               </Button>
@@ -153,7 +91,7 @@ export default function UserList() {
               <Delete
                 open={opend}
                 handleClose={handleClose_delete}
-                //HandelDelete={() => handelDeleteCampain(dealid)}
+                HandelDelete={() => handelDeleteUserA(id,statusa)}
                 text="De-active User"
               />
             )}
@@ -186,7 +124,7 @@ export default function UserList() {
       return (
         <Box sx={{ height: 400, width: '100%' }}>
           <DataGrid
-            rows={camData.result}
+            rows={camData.users}
             columns={columns}
             autoHeight
             initialState={{
@@ -201,7 +139,7 @@ export default function UserList() {
                   "margin-bottom": "1em",
                 },
             }}
-            getRowId={(row) => row.deal_id}
+            getRowId={(row) => row.id}
             pageSizeOptions={[5, 10]}
             checkboxSelection={true}
           />

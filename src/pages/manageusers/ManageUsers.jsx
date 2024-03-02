@@ -6,17 +6,18 @@ import Topwithslidebar from '../dashboard/components/Topwithslidebar';
 import {StatBox} from '../dashboard/components/StatBox';
 import GroupIcon from '@mui/icons-material/Group';
 import { useSelector, useDispatch } from 'react-redux';
-import {retrieveCampaign,selectAllData,getDataStatus} from '../../redux/campaignSlice'
+
 
 import { useNavigate} from "react-router-dom";
 import { openstatusss } from '../../redux/AllapplicationStatus';
 
 import UserList from './UserList';
+import { retrieveUser, selectAllUserData,getDataStatus } from '../../redux/userlistSlice';
 
 // const axios = require('axios');
 const ManageUsers = () => {
   const dispatch = useDispatch();
-  const camData = useSelector(selectAllData);
+  const camData = useSelector(selectAllUserData);
   const camstatus = useSelector(getDataStatus);
   const openstatus= useSelector(openstatusss);
   // const error = useSelector(getDataError);
@@ -27,7 +28,7 @@ const ManageUsers = () => {
   }
   useEffect(() => {
     if (camstatus === 'idle') {
-      dispatch(retrieveCampaign());
+      dispatch(retrieveUser());
     }
   }, [camstatus, dispatch]);
   if(camData.message==="Session expired"){

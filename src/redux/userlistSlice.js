@@ -10,13 +10,13 @@ export const retrieveUser = createAsyncThunk(
   }
 );
 
-// export const getDetails = createAsyncThunk(
-//   "campaignapi/CampaignDetails",
-//   async (id) => {
-//     const res = await AllApisDataService.getCampaignapiDetail(id);
-//     return res.data;
-//   }
-// );
+export const userActiveD = createAsyncThunk(
+  "userlist/userlist/status",
+  async (param) => {
+    const res = await AllApisDataService.userAactiveDeactive(param);
+    return res.data;
+  }
+);
 
 
 
@@ -49,44 +49,29 @@ const userlistSlice = createSlice({
         state.status = "failed";
         state.error = action.error;
       })
-      // .addCase(getDetails.pending, (state) => {
-      //   state.status = "loading";
-      // })
-      // .addCase(getDetails.fulfilled, (state, action) => {
-      //   state.status = "succeeded";
-      //   //alert(JSON.stringify(action.payload))
-      //   state.campaigndata_detail = action.payload;
-      // })
-      // .addCase(getDetails.rejected, (state, action) => {
-      //   state.status = "failed";
-      //   state.error = action.error;
-      // })
-      // .addCase(deActiveDeals.pending, (state) => {
-      //   state.status_deactive = "loading";
-      // })
-      // .addCase(deActiveDeals.fulfilled, (state, action) => {
-      //   state.status_deactive = "succeeded";
-      //   //alert(JSON.stringify(action.payload))
-      //   state.active_deactive = action.payload;
-      // })
-      // .addCase(deActiveDeals.rejected, (state, action) => {
-      //   state.status_deactive = "failed";
-      //   state.error_deactive = action.error;
-      // });
+      .addCase(userActiveD.pending, (state) => {
+        state.status_deactive = "loading";
+      })
+      .addCase(userActiveD.fulfilled, (state, action) => {
+        state.status_deactive = "succeeded";
+        //alert(JSON.stringify(action.payload))
+        state.active_deactive = action.payload;
+      })
+      .addCase(userActiveD.rejected, (state, action) => {
+        state.status_deactive = "failed";
+        state.error_deactive = action.error;
+      })
+      
   },
 });
 
-export const selectAllData = (state) => state.CampaignLists.userData;
-export const getDataStatus = (state) => state.CampaignLists.status;
-export const getDataError = (state) => state.CampaignLists.error;
+export const selectAllUserData = (state) => state.userlistSlice.userData;
+export const getDataStatus = (state) => state.userlistSlice.status;
+export const getDataError = (state) => state.userlistSlice.error;
 
-// export const getCampaignDetailAll = (state) =>
-//   state.CampaignLists.campaigndata_detail;
-
-// export const getDeactiveStatus = (state) => state.CampaignLists.status_deactive;
-// export const getDeactiveError = (state) => state.CampaignLists.active_deactive;
-// export const getCampaignDeactiveMsg = (state) =>
-//   state.CampaignLists.active_deactive;
+export const selectAllUserActiveS = (state) => state.userlistSlice.active_deactive;
+export const getUActiveStatus = (state) => state.userlistSlice.status_deactive;
+export const getUActiveError = (state) => state.userlistSlice.error_deactive;
 
 // export const { reserveRocket, myReservedRockets } = rocketsSlice.actions;
 export default userlistSlice.reducer;
