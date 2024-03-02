@@ -25,9 +25,13 @@ import fs from "fs";
 import Progressshows from "../../../components/AllLoaders/Progressshows";
 import { useSelector, useDispatch } from "react-redux";
 import { retrieveCampaign } from "../../../redux/campaignSlice";
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import { selectAllCategories } from "../../../redux/categorySlice";
+
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
   const [isloading, setLoading] = React.useState(false);
@@ -64,32 +68,15 @@ export default function FormDialog() {
     setOpen(false);
   };
 
-  useEffect(() => {
-    
-    let config = {
-      method: "get",
-      maxBodyLength: Infinity,
-      url: process.env.REACT_APP_API_PATH + process.env.REACT_APP_CATEGORY,
-      headers: {
-        Authorization: localStorage.getItem("token"),
-      }, 
-    };
-    axios
-      .request(config)
-      .then((response) => {
-        // alert("hello");
-        console.log("dfscvghjnefked");
-        console.log(JSON.stringify(response.data)); 
-      })
-      .catch((error) => {
-        // console.log(error);
-        // setLoading(false);
-      });
-  }, []);
-
   const addDealsData = () => {
     let formData = new FormData();
     //formData.append('pic1', event.target.myimage.files[0]);
+  };
+
+  const CategoryData = useSelector(selectAllCategories);
+
+  const handleCategory = (event) => {
+    setCategory(event.target.value);
   };
 
   function converToLocalTime(serverDate) {
@@ -113,7 +100,7 @@ export default function FormDialog() {
       <Dialog
         open={open}
         fullScreen
-       // fullWidth={true}
+        // fullWidth={true}
         //maxWidth={"md"}
         onClose={handleClose}
         PaperProps={{
@@ -123,16 +110,21 @@ export default function FormDialog() {
             setLoading(true);
             const formData = new FormData(event.currentTarget);
             const formJson = Object.fromEntries(formData.entries());
+            console.log(formJson);
             const cp_name = formJson.campainname_en;
             const cp_name_ar = formJson.campainname_ar;
             const dealprice = formJson.Price;
             const shortdiscription = formJson.shortdiscription;
             const longdiscription = formJson.longdiscription;
+            const shortdiscription_ar = formJson.shortdiscription_ar;
+            const longdiscription_ar = formJson.longdiscription_ar;
             const cp_product_name = formJson.productname_en;
+            const cp_product_name_ar = formJson.productname_ar;
             const tagtitle = "tagtitile";
             const joindeal_count = formJson.campain_join_count;
             const deal_startdate = formJson.startdate;
             const deal_enddate = formJson.enddate;
+            const product_price = formJson.product_price;
             const cp_status = 1;
             let sdate = converToLocalTime(deal_startdate);
             let edate = converToLocalTime(deal_enddate);
@@ -141,6 +133,7 @@ export default function FormDialog() {
             data.append("cp_name", cp_name);
             data.append("campainname_ar", cp_name_ar);
             data.append("cp_price", dealprice);
+            data.append("cp_shortdiscription", shortdiscription);
             data.append("cp_shortdiscription", shortdiscription);
             data.append("cp_longdiscription", longdiscription);
             data.append("cp_tagtitle", "tagtitttrrr");
@@ -151,7 +144,12 @@ export default function FormDialog() {
             data.append("avatar", filePath_d);
             data.append("avatar_product", filePath2_d);
             data.append("cp_product_name", cp_product_name);
-            data.append("cp_product_price", "");
+            data.append("cp_product_name_ar", cp_product_name_ar);
+            data.append("shortdiscription_ar", shortdiscription_ar);
+            data.append("longdiscription_ar", longdiscription_ar);
+            data.append("category_id", category);
+            data.append("cp_product_price", product_price);
+            // return false;
             let config = {
               method: "post",
               maxBodyLength: Infinity,
@@ -172,13 +170,13 @@ export default function FormDialog() {
                     position: "top-right",
                   });
                   dispatch(retrieveCampaign());
+                  handleClose();
                 } else {
                   toast.error(response.data.message, {
                     position: "top-right",
                   });
                 }
                 setLoading(false);
-                handleClose();
               })
               .catch((error) => {
                 console.log(error);
@@ -187,7 +185,13 @@ export default function FormDialog() {
           },
         }}
       >
-          <AppBar sx={{ position: 'relative',backgroundColor:'#320085;',color:'#FFF' }}>
+        <AppBar
+          sx={{
+            position: "relative",
+            backgroundColor: "#320085;",
+            color: "#FFF",
+          }}
+        >
           <Toolbar>
             <IconButton
               edge="start"
@@ -202,7 +206,7 @@ export default function FormDialog() {
             </Typography>
           </Toolbar>
         </AppBar>
-      
+
         {/* <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
           Add Campaign
         </DialogTitle>
@@ -278,6 +282,41 @@ export default function FormDialog() {
                 fullWidth
                 variant="standard"
               />
+            </div>
+          </Stack>
+
+          <Stack direction={"row"} style={{ flex: 1 }}>
+            <div style={{ flex: 0.5 }}>
+              <label>Product Price</label>
+              <TextField
+                autoFocus
+                required
+                margin="dense"
+                id="product_price"
+                name="product_price"
+                label="Product Price"
+                type="number"
+                fullWidth
+                variant="standard"
+              />
+            </div>
+            <div style={{ marginLeft: 10, flex: 0.5 }}>
+              <label>Category</label>
+              <FormControl fullWidth>
+                <Select
+                  autoFocus
+                  required
+                  id="demo-simple-select-standard"
+                  onChange={handleCategory}
+                  label="category"
+                >
+                  {CategoryData.categories.map((category) => (
+                    <MenuItem key={category.id} value={category.id}>
+                      {category.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             </div>
           </Stack>
           {/* const file = event.target.files[0]; */}
