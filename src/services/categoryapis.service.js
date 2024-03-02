@@ -1,8 +1,7 @@
 import http from "../normalapi/http-common";
 
 class CategoryDataService {
-
-  getAllCategories() { 
+  getAllCategories() {
     return http.get("/category/category.php");
   }
 
@@ -10,9 +9,9 @@ class CategoryDataService {
     return http.get(`category/category.php?uuid=${uuid}`);
   }
 
-  // deactiveCampaignapi(uuid) {
-  //   return http.get(`category/category.php?uuid=${uuid}`);
-  // } 
+  deleteCategoryapi(uuid) {
+    return http.delete(`category/category.php?uuid=${uuid}`);
+  }
 }
 
 export default new CategoryDataService();

@@ -14,16 +14,15 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Stack from "@mui/material/Stack";
 import SubMenuItem from "./SubMenuItem";
 import Avatar from "@mui/material/Avatar";
-import headerlogo from '../../../assets/logo_grp.png'
+import headerlogo from "../../../assets/logo_grp.png";
 import uisam from "../../../assets/Winnner_Logo.svg";
 import Dashboard from "../Dashboard";
-import { Container } from '@mui/material';
-import CssBaseline from '@mui/material/CssBaseline';
-import {openDrawserS} from '../../../redux/AllapplicationStatus'
-import { useSelector, useDispatch } from 'react-redux';
+import { Container } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
+import { openDrawserS } from "../../../redux/AllapplicationStatus";
+import { useSelector, useDispatch } from "react-redux";
 
 const drawerWidth = 240;
-
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -58,7 +57,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
   backgroundColor: "#1F2A40",
 }));
-
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -100,7 +98,7 @@ export default function Topwithslidebar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
-  
+
   const handleDrawerOpen = () => {
     setOpen(true);
     dispatch(openDrawserS(true));
@@ -113,8 +111,8 @@ export default function Topwithslidebar() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
-    <CssBaseline />
+    <Box sx={{ display: "flex" }}>
+      <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar sx={{ background: "#320085" }}>
           <IconButton
@@ -130,19 +128,24 @@ export default function Topwithslidebar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-          <Container>
-            <img src={headerlogo} alt="Image description" />
-        </Container>
+            <Container>
+              <img src={headerlogo} alt="Image description" />
+            </Container>
           </Typography>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open} sx={{ background: "#320085" }}>
-
-        <DrawerHeader sx={{ justifyContent: "flex-start",background: "#320085" }}>
+        <DrawerHeader
+          sx={{ justifyContent: "flex-start", background: "#320085" }}
+        >
           {open ? (
-            <Stack direction={"row"}  >
+            <Stack direction={"row"}>
               {/* <Avatar alt="Admin" src={uisam}  /> */}
-              <img src={uisam} style={{height:50,width:100}} alt="Image description" />
+              <img
+                src={uisam}
+                style={{ height: 50, width: 100 }}
+                alt="Image description"
+              />
               {open && (
                 <Typography sx={{ m: 1, color: "#fff" }}>ADMIN</Typography>
               )}
@@ -158,8 +161,15 @@ export default function Topwithslidebar() {
               </IconButton>
             </Stack>
           ) : (
-            <Stack direction={"row"} sx={{ mt: 7.5, p: 1 , background: "#320085" }}>
-           <img src={uisam} style={{height:50,width:40}} alt="Image description" />
+            <Stack
+              direction={"row"}
+              sx={{ mt: 7.5, p: 1, background: "#320085" }}
+            >
+              <img
+                src={uisam}
+                style={{ height: 50, width: 40 }}
+                alt="Image description"
+              />
               {open && (
                 <Typography sx={{ m: 1, color: "#fff" }}>ADMIN</Typography>
               )}
@@ -176,8 +186,8 @@ export default function Topwithslidebar() {
             </Stack>
           )}
         </DrawerHeader>
-        <Divider sx={{ backgroundColor: "#320085" }}/>
-        <List  sx={{ backgroundColor: "#320085" }}>
+        <Divider sx={{ backgroundColor: "#320085" }} />
+        <List sx={{ backgroundColor: "#320085" }}>
           <SubMenuItem open={open} />
         </List>
         <Divider sx={{ backgroundColor: "#320085" }} />
@@ -185,7 +195,6 @@ export default function Topwithslidebar() {
       {/* <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
        
       </Box> */}
-     
     </Box>
   );
 }

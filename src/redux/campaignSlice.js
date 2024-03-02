@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import AllApisDataService from "../services/winnerapis.service";
-import { json } from "react-router-dom";
-
+// import { json } from "react-router-dom";
 
 // export const createTutorial = createAsyncThunk(
 //   "tutorials/create",
@@ -11,17 +10,17 @@ import { json } from "react-router-dom";
 //   }
 // );
 
-export const retrieveCampaign = createAsyncThunk("campaignapi/CampaignList",
+export const retrieveCampaign = createAsyncThunk(
+  "campaignapi/CampaignList",
   async () => {
     const res = await AllApisDataService.getAll();
     return res.data;
   }
 );
 
-
 export const getDetails = createAsyncThunk(
   "campaignapi/CampaignDetails",
-  async ( id ) => {
+  async (id) => {
     const res = await AllApisDataService.getCampaignapiDetail(id);
     return res.data;
   }
@@ -29,7 +28,7 @@ export const getDetails = createAsyncThunk(
 
 export const deActiveDeals = createAsyncThunk(
   "campaignapi/deleteCampaign",
-  async ( id ) => {
+  async (id) => {
     const res = await AllApisDataService.deactiveCampaignapi(id);
     return res.data;
   }
@@ -66,22 +65,19 @@ export const deActiveDeals = createAsyncThunk(
 //   }
 // );
 
-
-
 const initialState = {
   campaigndata: [],
-  campaigndata_detail: '',
-  status: 'idle',
+  campaigndata_detail: "",
+  status: "idle",
   error: null,
   reserved: [],
-  status_deactive: 'idle',
+  status_deactive: "idle",
   error_deactive: null,
-  active_deactive:""
+  active_deactive: "",
 };
 
-
 const campaignSlice = createSlice({
-  name: 'campaign',
+  name: "campaign",
   initialState,
   reducers: {
     // reserveRocket: (state, action) => {
@@ -100,54 +96,53 @@ const campaignSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(retrieveCampaign.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
       .addCase(retrieveCampaign.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+        state.status = "succeeded";
         state.campaigndata = action.payload;
       })
       .addCase(retrieveCampaign.rejected, (state, action) => {
-        state.status = 'failed';
+        state.status = "failed";
         state.error = action.error;
-      }).addCase(getDetails.pending, (state) => {
-        state.status = 'loading';
+      })
+      .addCase(getDetails.pending, (state) => {
+        state.status = "loading";
       })
       .addCase(getDetails.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+        state.status = "succeeded";
         //alert(JSON.stringify(action.payload))
         state.campaigndata_detail = action.payload;
-       
-      }).addCase(getDetails.rejected, (state, action) => {
-        state.status = 'failed';
+      })
+      .addCase(getDetails.rejected, (state, action) => {
+        state.status = "failed";
         state.error = action.error;
       })
       .addCase(deActiveDeals.pending, (state) => {
-        state.status_deactive = 'loading';
+        state.status_deactive = "loading";
       })
       .addCase(deActiveDeals.fulfilled, (state, action) => {
-        state.status_deactive = 'succeeded';
+        state.status_deactive = "succeeded";
         //alert(JSON.stringify(action.payload))
         state.active_deactive = action.payload;
-       
       })
       .addCase(deActiveDeals.rejected, (state, action) => {
-        state.status_deactive = 'failed';
+        state.status_deactive = "failed";
         state.error_deactive = action.error;
-      })
-      
-
-      
+      });
   },
 });
 
 export const selectAllData = (state) => state.CampaignLists.campaigndata;
 export const getDataStatus = (state) => state.CampaignLists.status;
 export const getDataError = (state) => state.CampaignLists.error;
-export const getCampaignDetailAll = (state) => state.CampaignLists.campaigndata_detail;
+export const getCampaignDetailAll = (state) =>
+  state.CampaignLists.campaigndata_detail;
 
 export const getDeactiveStatus = (state) => state.CampaignLists.status_deactive;
 export const getDeactiveError = (state) => state.CampaignLists.active_deactive;
-export const getCampaignDeactiveMsg = (state) => state.CampaignLists.active_deactive;
+export const getCampaignDeactiveMsg = (state) =>
+  state.CampaignLists.active_deactive;
 
 // export const { reserveRocket, myReservedRockets } = rocketsSlice.actions;
 export default campaignSlice.reducer;
