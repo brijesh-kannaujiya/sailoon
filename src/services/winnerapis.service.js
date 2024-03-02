@@ -1,16 +1,15 @@
 import http from "../normalapi/http-common";
 
 class WinnerAllDataService {
-  
- adminLogin(data){
-    const res=http.post(process.env.REACT_APP_ADMIN_LOGIN , data);
+  adminLogin(data) {
+    const res = http.post(process.env.REACT_APP_ADMIN_LOGIN, data);
     return res;
   }
-  addCampaignData(data){
+  addCampaignData(data) {
     // const formData = new FormData(data);
     // const formJson = Object.fromEntries(formData.entries());
     //alert(JSON.stringify(data))
-    const res=http.post(process.env.REACT_APP_ADD_CAMPAIGN , data);
+    const res = http.post(process.env.REACT_APP_ADD_CAMPAIGN, data);
     return res;
   }
 
@@ -25,6 +24,11 @@ class WinnerAllDataService {
   deactiveCampaignapi(id) {
     return http.get(`campaignapi/deleteCampaign.php?deal_id=${id}`);
   }
+
+  getAllUser() {
+    return http.get("userlist/userlist.php");
+  }
+  
 
   // create(data) {
   //   return http.post("/tutorials", data);

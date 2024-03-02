@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Category from './pages/category/Category';
 import Campaign from './pages/campaign/Campaign';
 import thememui from './theme'
+import ManageUsers from './pages/manageusers/ManageUsers';
 function App() {
   const [inactiveTime, setInactiveTime] = useState(0);
   const [logoutMessage, setLogoutMessage] = useState('');
@@ -68,8 +69,9 @@ function App() {
           <main className="content">
              {/* <Topwithslidebar/> */}
             <Routes>
+              
               <Route path="/" element={<LoginPage />} />
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/dashboard" element={<ManageUsers />} />
               <Route path="/category" element={<Category />} />
               <Route path="/campaign" element={<Campaign />} />
               <Route path='*' exact={true} element={<PageNotfound />} />

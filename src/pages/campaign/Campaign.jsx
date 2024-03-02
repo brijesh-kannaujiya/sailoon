@@ -37,7 +37,7 @@ const Campaign = () => {
            <AddCampaign/>
          </div>
          <Box sx={{mt:1}}>
-         <DashboardList />
+          <DashboardList />
          </Box>
        </Stack>
      </Box>

@@ -6,6 +6,8 @@ import {
   getDataStatus,
   // getDataError,
   getDetails,
+  deActiveDeals,
+  retrieveCampaign,
 } from "../../../redux/campaignSlice";
 import Progressshows from "../../../components/AllLoaders/Progressshows";
 
@@ -14,7 +16,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Stack, Box, Tooltip } from "@mui/material";
 import EditCampaign from "./EditCampaign";
-import DeleteCampaign from "./DeleteCampaign";
+import Delete from "../../Delete";
 
 export default function DashboardList() {
   const camData = useSelector(selectAllData);
@@ -40,6 +42,12 @@ export default function DashboardList() {
     setOpen_D(false);
   };
 
+  const handelDeleteCampain = (dealid) => {
+    dispatch(deActiveDeals(dealid))
+    dispatch(retrieveCampaign());
+  };
+
+  
   const columns = [
     { field: "cp_name", headerName: "name", width: 100 },
     { field: "cp_name_ar", headerName: "name ar", width: 100 },
@@ -157,12 +165,14 @@ export default function DashboardList() {
               </IconButton>
             </Box>
             {opend === true && (
-              <DeleteCampaign
+              <Delete
                 open={opend}
                 handleClose={handleClose_delete}
-                dealid={dealid}
+                HandelDelete={() => handelDeleteCampain(dealid)}
+                text="Delete Campaign"
               />
             )}
+            
           </Stack>
         );
       },

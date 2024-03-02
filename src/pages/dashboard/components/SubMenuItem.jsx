@@ -1,68 +1,78 @@
 import * as React from "react";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+// import Accordion from "@mui/material/Accordion";
+// import AccordionSummary from "@mui/material/AccordionSummary";
+// import AccordionDetails from "@mui/material/AccordionDetails";
+// import Typography from "@mui/material/Typography";
+// import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Box from "@mui/material/Box";
-import GroupsIcon from "@mui/icons-material/Groups";
-import { Stack } from "@mui/material";
+// import GroupsIcon from "@mui/icons-material/Groups";
+// import { Stack } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import ViewListIcon from "@mui/icons-material/ViewList";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import AddchartIcon from "@mui/icons-material/Addchart"; 
-import { useNavigate} from "react-router-dom"; 
-import DashboardIcon from '@mui/icons-material/Dashboard'; 
-import CategoryIcon from '@mui/icons-material/Category';
-import CampaignIcon from '@mui/icons-material/Campaign';
-
+// import ViewListIcon from "@mui/icons-material/ViewList";
+// import PersonAddIcon from "@mui/icons-material/PersonAdd";
+// import AddchartIcon from "@mui/icons-material/Addchart";
+import { useNavigate } from "react-router-dom";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import CategoryIcon from "@mui/icons-material/Category";
+import CampaignIcon from "@mui/icons-material/Campaign";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 const SubMenuItem = (props) => {
-
   const navigate = useNavigate();
-  const handleNavigateClick=(link)=>{
-    navigate(link); 
-  }
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleNavigateClick = (link) => {
+    navigate(link);
   };
+  // const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  // const handleClick = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
 
   return (
-    <Box  sx={{ backgroundColor: "#320085" }} > 
-    <nav aria-label="main mailbox folders">
+    <Box sx={{ backgroundColor: "#320085" }}>
+      <nav aria-label="main mailbox folders">
         <List sx={{ color: "#fff" }}>
-          <ListItem disablePadding   onClick={()=>handleNavigateClick('/dashboard')} >
-            <ListItemButton >
+          
+        <ListItem
+            disablePadding
+            onClick={() => handleNavigateClick("/dashboard")}
+          >
+            <ListItemButton>
               <ListItemIcon>
-                <DashboardIcon sx={{ color: "#fff" }}/>
+                <AccountCircleIcon sx={{ color: "#fff" }} />
               </ListItemIcon>
-              <ListItemText primary="Dashboard"  />
+              <ListItemText primary="Manage Users" />
             </ListItemButton>
           </ListItem>
           <Divider sx={{ backgroundColor: "#fff" }} />
-          <ListItem disablePadding   onClick={()=>handleNavigateClick('/category')}>
+         
+          <ListItem
+            disablePadding
+            onClick={() => handleNavigateClick("/category")}
+          >
             <ListItemButton>
               <ListItemIcon>
-                <CategoryIcon sx={{ color: "#fff" }}/>
+                <CategoryIcon sx={{ color: "#fff" }} />
               </ListItemIcon>
               <ListItemText primary="Category" />
             </ListItemButton>
           </ListItem>
           <Divider sx={{ backgroundColor: "#fff" }} />
-          <ListItem disablePadding   onClick={()=>handleNavigateClick('/campaign')}>
+          <ListItem
+            disablePadding
+            onClick={() => handleNavigateClick("/campaign")}
+          >
             <ListItemButton>
               <ListItemIcon>
-                <CampaignIcon sx={{ color: "#fff" }}/>
+                <CampaignIcon sx={{ color: "#fff" }} />
               </ListItemIcon>
               <ListItemText primary="Campaign" />
             </ListItemButton>
@@ -71,7 +81,7 @@ const SubMenuItem = (props) => {
         </List>
       </nav>
 
-{/* 
+      {/* 
       <Accordion sx={{ backgroundColor: "#320085" }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon sx={{ color: "#fff" }} />}
@@ -231,7 +241,6 @@ const SubMenuItem = (props) => {
       </Accordion>
 
        */}
-
     </Box>
   );
 };
