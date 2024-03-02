@@ -170,6 +170,7 @@ export default function DashboardList() {
                 handleClose={handleClose_delete}
                 HandelDelete={() => handelDeleteCampain(dealid)}
                 text="Delete Campaign"
+                msg={"Are you sure you want to delete it ?"}
               />
             )}
             

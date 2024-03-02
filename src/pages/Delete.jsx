@@ -20,7 +20,7 @@ const Delete = (props) => {
         <DialogTitle id="alert-dialog-title">{props.text}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete it ?
+           {props.msg}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

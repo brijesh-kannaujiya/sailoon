@@ -46,8 +46,8 @@ const ManageUsers = () => {
        // gridAutoRows="140px"
         gap="20px"
       >
-          <StatBox title={`Total Users : ${"5"}`} icon={<GroupIcon sx={{color:'#fff'}}/>} colorss={'#1F2A40'}/>
-          <StatBox title={`Total Campaign : ${"5"}`} icon={<GroupIcon sx={{color:'#fff'}}/>} colorss={'#009688'}/>
+          <StatBox title={`Total Users : ${camData.users.length}`} icon={<GroupIcon sx={{color:'#fff'}}/>} colorss={'#1F2A40'}/>
+          <StatBox title={`Total Campaign : ${"0"}`} icon={<GroupIcon sx={{color:'#fff'}}/>} colorss={'#009688'}/>
           <StatBox title={`Total Winner User : ${"0"}`} icon={<GroupIcon sx={{color:'#fff'}}/>} colorss={'#e65100'}/>
           <StatBox title={`Total Sell Products : ${"0"}`} icon={<GroupIcon sx={{color:'#fff'}}/>} colorss={'#607d8b'}/>
         </Box>

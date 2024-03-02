@@ -84,6 +84,7 @@ const CategoryList = () => {
                 handleClose={handleClose_delete}
                 HandelDelete={() => handelDeleteCategory(params.row.uuid)}
                 text="Delete Category"
+                msg={"Are you sure you want to delete it ?"}
               />
 
               // <DeleteCampaign

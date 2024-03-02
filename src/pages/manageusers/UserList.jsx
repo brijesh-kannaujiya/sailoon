@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { DataGrid } from "@mui/x-data-grid/DataGrid";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -16,14 +16,19 @@ import {
   deActiveDeals,
   userActiveD,
   retrieveUser,
+  selectAllUserActiveS,
+  getUActiveStatus,
 } from "../../redux/userlistSlice";
-
+import { ToastContainer, toast } from 'react-toastify';
 export default function UserList() {
   const camData = useSelector(selectAllUserData);
   const camstatus = useSelector(getDataStatus);
+  const useractiveM = useSelector(selectAllUserActiveS);
+  const userActives = useSelector(getUActiveStatus);
   const [open, setOpen] = React.useState(false);
   const [id, setId] = React.useState("");
   const [statusa, setStatusA] = React.useState("");
+  const [msgs, setMSG] = React.useState("");
   const dispatch = useDispatch();
   const handleClose = () => {
     setOpen(false);
@@ -44,15 +49,20 @@ export default function UserList() {
     setOpen_D(false);
   };
 
+  useEffect(() => {
+    if(userActives==="succeeded"){
+      toast.success(useractiveM.message, {
+        position: 'top-right',
+      });
+      dispatch(retrieveUser());
+    }
+  }, [userActives,dispatch]);
+
   const handelDeleteUserA = (id, status) => {
     const formData = new FormData();
     formData.append("id", id);
     formData.append("status", status);
-    // const data = { id: id, status: status };
-    // const formJson = Object.fromEntries(formData.entries());
-    // alert(JSON.stringify(formJson))
     dispatch(userActiveD(formData));
-    dispatch(retrieveUser());
   };
 
   const columns = [
@@ -64,7 +74,14 @@ export default function UserList() {
       width: 200,
     },
     { field: "mobile", headerName: "Mobile Number", width: 200 },
-    { field: "status", headerName: "User Active Status", width: 200 },
+    { 
+      field: "status", headerName: "User Active Status", width: 200 ,
+      renderCell: (params) => {
+        return (<Box>
+             <p>{Number(params.row.status)===1 ? "Active" :"De-active"}</p>
+        </Box>)
+      }
+     },
     {
       field: "action",
       headerName: "Action",
@@ -80,12 +97,14 @@ export default function UserList() {
                   //alert(params.row.status)
                   if (Number(params.row.status) === 0) {
                     handleClickOpen_delete(btoa(params.row.id), 1);
+                    setMSG("Are you sure you want to Active this user ?")
                   } else {
                     handleClickOpen_delete(btoa(params.row.id), 0);
+                    setMSG(" Are you sure you want to De-active this user ?")
                   }
                 }}
               >
-                De-active
+                {Number(params.row.status)===0 ? "Active" :"De-active"}
               </Button>
             </Box>
             {opend === true && (
@@ -94,6 +113,7 @@ export default function UserList() {
                 handleClose={handleClose_delete}
                 HandelDelete={() => handelDeleteUserA(id, statusa)}
                 text="De-active User"
+                msg={msgs}
               />
             )}
           </Stack>
@@ -143,6 +163,7 @@ export default function UserList() {
             pageSizeOptions={[5, 10]}
             checkboxSelection={true}
           />
+           <ToastContainer />
         </Box>
       );
     }
