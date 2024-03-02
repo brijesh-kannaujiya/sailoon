@@ -10,11 +10,17 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Stack, Box, Tooltip } from "@mui/material";
 
 import Delete from "../Delete";
-import { selectAllUserData,getDataStatus,deActiveDeals, userActiveD, retrieveUser } from "../../redux/userlistSlice";
+import {
+  selectAllUserData,
+  getDataStatus,
+  deActiveDeals,
+  userActiveD,
+  retrieveUser,
+} from "../../redux/userlistSlice";
 
 export default function UserList() {
   const camData = useSelector(selectAllUserData);
-  const camstatus = useSelector(getDataStatus); 
+  const camstatus = useSelector(getDataStatus);
   const [open, setOpen] = React.useState(false);
   const [id, setId] = React.useState("");
   const [statusa, setStatusA] = React.useState("");
@@ -28,7 +34,7 @@ export default function UserList() {
   };
   const [opend, setOpen_D] = React.useState(false);
 
-  const handleClickOpen_delete = (id,status) => {
+  const handleClickOpen_delete = (id, status) => {
     setOpen_D(true);
     setId(id);
     setStatusA(status);
@@ -38,19 +44,16 @@ export default function UserList() {
     setOpen_D(false);
   };
 
-  const handelDeleteUserA = (id,status) => {
+  const handelDeleteUserA = (id, status) => {
     const formData = new FormData();
-    formData.append("id",id);
-    formData.append("status",status);
-    const data={"id":id,
-      "status":status
-  }
+    formData.append("id", id);
+    formData.append("status", status);
+    // const data = { id: id, status: status };
     // const formJson = Object.fromEntries(formData.entries());
     // alert(JSON.stringify(formJson))
-    dispatch(userActiveD(data))
+    dispatch(userActiveD(formData));
     dispatch(retrieveUser());
   };
-
 
   const columns = [
     { field: "fName", headerName: "name", width: 200 },
@@ -65,37 +68,34 @@ export default function UserList() {
     {
       field: "action",
       headerName: "Action",
-      width:300,
+      width: 300,
       sortable: false,
       renderCell: (params) => {
         return (
           <Stack direction={"row"}>
-           
             <Box sx={{ border: 1 }}>
               <Button
                 aria-label="delete"
                 onClick={() => {
                   //alert(params.row.status)
-                  if(Number(params.row.status)===0){
-                    handleClickOpen_delete(btoa(params.row.id),1);
-                  }else{
-                    handleClickOpen_delete(btoa(params.row.id),0);
+                  if (Number(params.row.status) === 0) {
+                    handleClickOpen_delete(btoa(params.row.id), 1);
+                  } else {
+                    handleClickOpen_delete(btoa(params.row.id), 0);
                   }
-                }
-                }
+                }}
               >
-               De-active
+                De-active
               </Button>
             </Box>
             {opend === true && (
               <Delete
                 open={opend}
                 handleClose={handleClose_delete}
-                HandelDelete={() => handelDeleteUserA(id,statusa)}
+                HandelDelete={() => handelDeleteUserA(id, statusa)}
                 text="De-active User"
               />
             )}
-            
           </Stack>
         );
       },
@@ -122,7 +122,7 @@ export default function UserList() {
       );
     } else {
       return (
-        <Box sx={{ height: 400, width: '100%' }}>
+        <Box sx={{ height: 400, width: "100%" }}>
           <DataGrid
             rows={camData.users}
             columns={columns}
