@@ -321,13 +321,14 @@ export default function FormDialog() {
                   required
                   id="demo-simple-select-standard"
                   onChange={handleCategory}
-                  label="category"
+                  //label="category"
                 >
-                  {CategoryData.categories.map((category) => (
+                  {CategoryData.length!==0
+                  (CategoryData.categories.map((category) => (
                     <MenuItem key={category.id} value={category.id}>
                       {category.name}
                     </MenuItem>
-                  ))}
+                  )))}
                 </Select>
               </FormControl>
             </div>

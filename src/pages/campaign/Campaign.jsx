@@ -8,10 +8,11 @@ import DashboardList from '../dashboard/components/DashboardList';
 import { Stack} from '@mui/material';
 import {retrieveCampaign,selectAllData,getDataStatus,getDataError} from '../../redux/campaignSlice'
 import { openstatusss } from '../../redux/AllapplicationStatus';
-
+import LoginPage from '../LoginPage';
 const Campaign = () => {
     const dispatch = useDispatch();
     const camData = useSelector(selectAllData); 
+   
     const camstatus = useSelector(getDataStatus);
     const error = useSelector(getDataError);  
     const navigate = useNavigate();
@@ -24,10 +25,11 @@ const Campaign = () => {
     const handleClick = () => {
       navigate("/");
     }
-  
-    if (camData.message === "Session expired") {
+   
+     if (camData.message === "Session expired") {
       handleClick();
     } else {
+    
       return (
         <>
       <Topwithslidebar  />
@@ -44,6 +46,7 @@ const Campaign = () => {
      </>
       );
     }
+  
 }
 
 export default Campaign

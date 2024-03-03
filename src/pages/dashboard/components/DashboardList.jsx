@@ -23,6 +23,7 @@ export default function DashboardList() {
   const camstatus = useSelector(getDataStatus); 
   const [open, setOpen] = React.useState(false);
   const [dealid, setDealId] = React.useState("");
+  //alert(JSON.stringify(camData))
   const dispatch = useDispatch();
   const handleClose = () => {
     setOpen(false);
@@ -137,7 +138,7 @@ export default function DashboardList() {
       field: "action",
       headerName: "Action",
       sortable: false,
-      renderCell: (params) => {
+      renderCell:(params) => {
         return (
           <Stack direction={"row"}>
             <Box sx={{ border: 1 }}>
