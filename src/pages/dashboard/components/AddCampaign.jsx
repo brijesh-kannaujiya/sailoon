@@ -30,10 +30,10 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { selectAllCategories } from "../../../redux/categorySlice";
+import { getCategoryDataStatus, retrieveCategories, selectAllCategories } from "../../../redux/categorySlice";
 import { styled } from '@mui/system';
 
-export default function FormDialog() {
+export default function FormDialog(props) {
   const [open, setOpen] = React.useState(false);
   const [isloading, setLoading] = React.useState(false);
   const [data, setData] = useState({ dealimg: "", productimg: "" });
@@ -64,6 +64,14 @@ export default function FormDialog() {
     setOpen(true);
     // notify();
   };
+  const CategoryData = useSelector(selectAllCategories);
+  const categoryStatus = useSelector(getCategoryDataStatus);
+  useEffect(() => {
+    if (categoryStatus === "idle") {
+
+        dispatch(retrieveCategories());
+    }
+  }, [categoryStatus, dispatch]);  
 
   const handleClose = () => {
     setOpen(false);
@@ -74,7 +82,8 @@ export default function FormDialog() {
     //formData.append('pic1', event.target.myimage.files[0]);
   };
 
-  const CategoryData = useSelector(selectAllCategories);
+
+  
 
   const handleCategory = (event) => {
     setCategory(event.target.value);
@@ -99,7 +108,7 @@ export default function FormDialog() {
     padding: '0 30px',
     margin: theme.spacing(2),
   }));
-  
+
 
   return (
     <React.Fragment>
@@ -321,12 +330,12 @@ export default function FormDialog() {
                   required
                   id="demo-simple-select-standard"
                   onChange={handleCategory}
-                  //label="category"
+                  label="category"
                 >
-                  {CategoryData.length!==0
-                  (CategoryData.categories.map((category) => (
-                    <MenuItem key={category.id} value={category.id}>
-                      {category.name}
+                  {categoryStatus!=="idle" && categoryStatus!=="loading" &&
+                    (CategoryData.categories.map((categoryarr) => (
+                    <MenuItem key={categoryarr.id} value={categoryarr.id}>
+                      {categoryarr.name}
                     </MenuItem>
                   )))}
                 </Select>
@@ -473,4 +482,5 @@ export default function FormDialog() {
       <ToastContainer />
     </React.Fragment>
   );
+              
 }

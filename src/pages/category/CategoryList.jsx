@@ -17,8 +17,9 @@ import Progressshows from "../../components/AllLoaders/Progressshows";
 import Delete from "../Delete";
 
 const CategoryList = () => {
-  const CategoryData = useSelector(selectAllCategories);
-  const camstatus = useSelector(getCategoryDataStatus);
+  const categoryData = useSelector(selectAllCategories);
+  const categoryStatus = useSelector(getCategoryDataStatus);
+  //alert(JSON.stringify(categoryStatus));
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
   const handleClose = () => {
@@ -99,12 +100,12 @@ const CategoryList = () => {
     },
   ];
 
-  if (camstatus === "idle") {
+  if (categoryStatus === "idle") {
     return <Progressshows />;
-  } else if (camstatus === "loading") {
+  } else if (categoryStatus === "loading") {
     return <Progressshows />;
   } else {
-    if (CategoryData.status === "fail") {
+    if (categoryData.status === "fail") {
       return (
         <div
           style={{
@@ -124,7 +125,7 @@ const CategoryList = () => {
             <h3>Category List</h3>
           </Stack>
           <DataGrid
-            rows={CategoryData.categories}
+            rows={categoryData.categories}
             columns={columns}
             autoHeight
             initialState={{

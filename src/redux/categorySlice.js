@@ -31,8 +31,8 @@ export const deleteCategory = createAsyncThunk(
 const initialState = {
   categoryData: [],
   categoryDetail: [],
-  status: "idle",
-  error: null,
+  catstatus: "idle",
+  caterror: null,
 };
 
 const categorySlice = createSlice({
@@ -42,33 +42,33 @@ const categorySlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(retrieveCategories.pending, (state) => {
-        state.status = "loading";
+        state.catstatus = "loading";
       })
       .addCase(retrieveCategories.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.catstatus = "succeeded";
         state.categoryData = action.payload;
       })
       .addCase(retrieveCategories.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error;
+        state.catstatus = "failed";
+        state.caterror = action.error;
       })
       .addCase(getSingleCategoryDetails.pending, (state) => {
-        state.status = "loading";
+        state.catstatus = "loading";
       })
       .addCase(getSingleCategoryDetails.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.catstatus = "succeeded";
         state.categoryDetail = action.payload;
       })
       .addCase(getSingleCategoryDetails.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error;
+        state.catstatus = "failed";
+        state.caterror = action.error;
       });
   },
 });
 
 export const selectAllCategories = (state) => state.category.categoryData;
-export const getCategoryDataStatus = (state) => state.category.status;
-export const getCategoryDataError = (state) => state.category.error;
+export const getCategoryDataStatus = (state) => state.category.catstatus;
+export const getCategoryDataError = (state) => state.category.caterror;
 export const getCategoryDetail = (state) => state.category.categoryDetail;
 // export function getCategoryDetails(state) {
 //   console.log(state);

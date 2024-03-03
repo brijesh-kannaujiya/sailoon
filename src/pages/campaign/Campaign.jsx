@@ -9,10 +9,10 @@ import { Stack} from '@mui/material';
 import {retrieveCampaign,selectAllData,getDataStatus,getDataError} from '../../redux/campaignSlice'
 import { openstatusss } from '../../redux/AllapplicationStatus';
 import LoginPage from '../LoginPage';
+import { getCategoryDataStatus, retrieveCategories, selectAllCategories } from '../../redux/categorySlice';
 const Campaign = () => {
     const dispatch = useDispatch();
     const camData = useSelector(selectAllData); 
-   
     const camstatus = useSelector(getDataStatus);
     const error = useSelector(getDataError);  
     const navigate = useNavigate();
@@ -22,6 +22,10 @@ const Campaign = () => {
           dispatch(retrieveCampaign());
         }
       }, [camstatus, dispatch]);
+
+    
+    
+   
     const handleClick = () => {
       navigate("/");
     }
@@ -35,8 +39,8 @@ const Campaign = () => {
       <Topwithslidebar  />
       <Box  sx={{mt:10,ml:openstatus===true ? 30 :10}}>
        <Stack sx={{pl:10,pr:10,mt:4}}> 
-         <div>
-           <AddCampaign/>
+      <div>
+           <AddCampaign />
          </div>
          <Box sx={{mt:1}}>
           <DashboardList />

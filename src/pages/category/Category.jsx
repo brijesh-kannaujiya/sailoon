@@ -41,7 +41,7 @@ const Category = () => {
         <Box sx={{ mt: 8, ml: openstatus === true ? 30 : 5 }}>
           {/* Other components */}
           <div style={{ marginRight: 50, marginLeft: 50, marginTop: 40 }}>
-            <AddCategory />
+              <AddCategory />
             <div style={{ marginTop: 100 }}>
               <CategoryList />
             </div>
