@@ -332,6 +332,7 @@ export default function FormDialog(props) {
                   onChange={handleCategory}
                   label="category"
                 >
+                 
                   {categoryStatus!=="idle" && categoryStatus!=="loading" &&
                     (CategoryData.categories.map((categoryarr) => (
                     <MenuItem key={categoryarr.id} value={categoryarr.id}>
